@@ -1,0 +1,712 @@
+/*
+ * styles.css
+ * Complete CSS for Google Drive Link Converter UI
+ */
+
+/* -------------------------------------- */
+/* 1. Base and Typography */
+/* -------------------------------------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f8fafc;
+  min-height: 100vh;
+  padding: 20px;
+  color: #334155;
+}
+
+.container {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  max-width: 1200px;
+  width: 100%;
+  padding: 30px;
+  border: 1px solid #e2e8f0;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+/* -------------------------------------- */
+/* 2. Input and Form Elements */
+/* -------------------------------------- */
+
+.input-section {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #e2e8f0;
+}
+
+input[type="text"], input[type="file"], select {
+  width: 100%;
+  padding: 12px 16px; 
+  margin-bottom: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1.0rem; 
+  transition: all 0.15s;
+  background: white;
+}
+
+input[type="text"]:focus, select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 10px;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-import {
+  width: 100%;
+  padding: 12px; 
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.0rem; 
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-import:hover {
+  background: #7c3aed;
+}
+
+#output {
+  margin: 16px 0;
+  padding: 14px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  display: none;
+}
+
+#output.show {
+  display: block;
+}
+
+#output.error {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.file-input-container {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.file-input-label {
+  display: block;
+  padding: 10px 14px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  background: white;
+}
+
+.file-input-label:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.file-input-label.has-file {
+  border-color: #10b981;
+  background: #f0fdf4;
+}
+
+#csvFile {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* -------------------------------------- */
+  /* 3. Search and Filtering (Pill Style) */
+  /* -------------------------------------- */
+
+  .search-section {
+    margin: 25px 0 10px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border: 2px solid #3b82f6;
+    border-radius: 8px;
+  }
+
+  #searchBox {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #94a3b8;
+    border-radius: 6px;
+    font-size: 1.0rem;
+    background: #f8fafc;
+  }
+
+  .btn-secondary {
+    padding: 12px 20px;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  /* Category Pill Container */
+  .category-pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 5px 0;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 15px;
+  }
+
+  .category-pill {
+    padding: 8px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 20px;
+    background: #f1f5f9;
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    
+    /* Internal Flex for Controls */
+    display: flex; 
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Pill Name Span */
+  .category-pill .pill-name {
+      padding: 0;
+      cursor: pointer;
+  }
+  
+  .category-pill:hover {
+    background: #e2e8f0;
+    color: #334155;
+  }
+
+  .category-pill.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+  }
+
+  .category-pill.active:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+  }
+
+  /* Pill Controls (Edit/Delete) */
+  .pill-controls {
+      display: flex;
+      gap: 4px;
+      margin-left: 4px; /* Space from the name */
+  }
+  
+  .pill-action {
+      font-size: 0.75rem;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.1s;
+      color: #94a3b8; /* Default color for actions */
+      background: #e5e7eb;
+      font-weight: bold;
+      line-height: 1;
+      cursor: pointer;
+  }
+
+  .category-pill:hover .pill-action {
+      background: white; /* Brighter background on pill hover */
+  }
+
+  .pill-edit {
+      color: #f59e0b; /* Orange for edit */
+      padding-top: 2px; /* Visual alignment for pen icon */
+  }
+  
+  .pill-delete {
+      color: #ef4444; /* Red for delete */
+  }
+  
+  .pill-edit:hover {
+      background: #fffbeb !important;
+  }
+  
+  .pill-delete:hover {
+      background: #fee2e2 !important;
+  }
+
+  /* Bulk Add Mode Visuals */
+  .category-pills-container.bulk-add-mode .category-pill {
+      border: 2px dashed #f59e0b; /* Orange dashed border */
+      opacity: 0.7;
+      background: #fffbeb;
+  }
+  .category-pills-container.bulk-add-mode .category-pill:hover {
+      opacity: 1;
+      background: #fef3c7;
+      transform: scale(1.02);
+  }
+  /* Hide controls in bulk add mode */
+  .bulk-add-mode .pill-controls {
+      display: none;
+  }
+  
+  /* Button for cancelling bulk add */
+  .btn-bulk-cancel {
+      background: #64748b;
+  }
+
+  /* ... (Rest of existing styles) ... */
+
+  /* Responsive adjustment for search section on small screens */
+  @media (max-width: 768px) {
+    /* ... (Existing media queries) ... */
+    .search-section {
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px;
+    }
+    #searchBox, .btn-secondary {
+      width: 100%;
+      min-width: auto;
+    }
+    /* Category pills now take up the full width below the search box */
+    .category-pills-container {
+        width: 100%;
+    }
+}
+/* -------------------------------------- */
+/* 4. Stats and Data Display */
+/* -------------------------------------- */
+
+.stats-section {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #e0f2fe; 
+    border: 1px solid #93c5fd;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: #1e3a8a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-value {
+    font-weight: 700; 
+    font-size: 1.2rem; 
+    color: #0d9488; 
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th {
+  background: #f8fafc;
+  padding: 14px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+td {
+  padding: 14px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+tr:hover {
+  background: #f8fafc;
+}
+
+.link-text {
+  color: #3b82f6;
+  font-size: 0.8rem;
+  word-break: break-all;
+  text-decoration: none;
+  display: inline-block;
+  transition: color 0.2s;
+}
+
+.link-text:hover {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+.preview-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.preview-image {
+  width: 150px;
+  height:150px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.preview-placeholder {
+  width: 50px;
+  height: 50px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  color: #94a3b8;
+}
+
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.category-tag {
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.category-tag.all {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+/* -------------------------------------- */
+/* 5. Row Actions (Copy, Edit, Delete) */
+/* -------------------------------------- */
+
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-copy, .btn-edit, .btn-delete {
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.btn-copy {
+  background: #10b981;
+  color: white;
+}
+
+.btn-edit {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn-delete {
+  background: #ef4444;
+  color: white;
+}
+
+/* Name Editing */
+.name-edit-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name-display {
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.name-display:hover {
+  background: #f1f5f9;
+}
+
+.name-input {
+  padding: 4px 8px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  width: 100%;
+}
+
+.edit-controls {
+  display: flex;
+  gap: 4px;
+}
+
+.btn-save, .btn-cancel {
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.btn-save {
+  background: #10b981;
+  color: white;
+}
+
+.btn-cancel {
+  background: #6b7280;
+  color: white;
+}
+
+/* -------------------------------------- */
+/* 6. Selection and Bulk Actions */
+/* -------------------------------------- */
+
+.selection-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.select-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.export-btn {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.export-btn:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.bulk-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-bulk {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-bulk-delete {
+  background: #ef4444;
+  color: white;
+}
+
+.btn-bulk-delete:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.btn-bulk-copy {
+  background: #10b981;
+  color: white;
+}
+
+.btn-bulk-copy:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.btn-bulk-category {
+  background: #f59e0b;
+  color: white;
+}
+
+.btn-bulk-category:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.btn-create-category {
+  background: #06b6d4;
+  color: white;
+}
+
+.btn-create-category:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+/* -------------------------------------- */
+/* 7. Notifications */
+/* -------------------------------------- */
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  background: #10b981;
+  color: white;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+}
+
+.notification.show {
+  display: block;
+  animation: fadeInOut 3s ease;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(-10px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+}
+
+/* -------------------------------------- */
+/* 8. Media Queries (Responsiveness) */
+/* -------------------------------------- */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+  .action-buttons {
+    flex-direction: column;
+  }
+  .preview-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  /* Search & Filter Fix for Mobile */
+  .search-section {
+    flex-direction: column; 
+    gap: 10px;
+    padding: 10px;
+  }
+  #searchBox, .btn-secondary {
+    width: 100%; 
+    min-width: auto;
+  }
+  /* Category pills now take up the full width below the search box */
+  .category-pills-container {
+      width: 100%;
+  }
+  .selection-controls, .bulk-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
